@@ -56,10 +56,10 @@ class PlanPrice(models.Model):
 
 class Vehicle(models.Model):
 
-    specie = models.CharField(max_length=200, null=True, blank=True)
+    vehicle_type = models.ForeignKey(VehicleType, null=True, blank=True, on_delete=models.SET_NULL)
+    vehicle_specie = models.ForeignKey(VehicleSpecie, null=True, blank=True, on_delete=models.SET_NULL)
     plate = models.CharField(max_length=200, null=True, blank=True)
     fipe_code = models.CharField(max_length=200, null=True, blank=True)
-    vehicle_type = models.CharField(max_length=200, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     model = models.CharField(max_length=200, null=True, blank=True)
     make = models.CharField(max_length=200, null=True, blank=True)
