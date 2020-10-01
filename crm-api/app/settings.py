@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'request_log',
     'fipe',
     'core',
+    'quotation',
     'email_service'
 ]
 
