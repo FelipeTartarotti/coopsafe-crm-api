@@ -15,6 +15,7 @@ class PlanPriceInline(admin.StackedInline):
 
 class PlanAdmin(admin.ModelAdmin):
     inlines = [PlanPriceInline]
+    save_as = True
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         if db_field.name == 'vehicle_type':
