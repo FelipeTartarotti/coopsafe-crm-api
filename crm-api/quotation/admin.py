@@ -17,6 +17,8 @@ class PlanAdmin(admin.ModelAdmin):
     inlines = [PlanPriceInline]
     save_as = True
 
+    list_display = ('name','vehicle_type__name', 'vehicle_type__specie')
+
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         if db_field.name == 'vehicle_type':
             kwargs['widget'] = CheckboxSelectMultiple()
