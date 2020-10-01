@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c+d9ybs0*!_ji3!sudhfa)p!plg)w0hs*%=x%m+bj1r8)vkkcm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_extensions',
+    'django_filters',
     'corsheaders',
     'request_log',
     'fipe',
@@ -49,6 +50,10 @@ INSTALLED_APPS = [
     'quotation',
     'email_service'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 MIDDLEWARE = [
     'request_log.middleware.RequestLogMiddleware',

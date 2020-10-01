@@ -61,8 +61,6 @@ class PlanSerializer(serializers.ModelSerializer):
             return []
 
 
-
-
 class ChosenPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ChosenPlan
