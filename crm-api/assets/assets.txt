@@ -1,0 +1,11 @@
+cd /var/www/html/coopsafe-crm-api
+source env/bin/activate
+
+sudo systemctl restart nginx
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn
+
+
+nano /etc/nginx/sites-available/cotacao-api.coopsafe.com.br
+
+sudo tail -30 /var/log/nginx/error.log
