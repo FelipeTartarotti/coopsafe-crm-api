@@ -1,8 +1,9 @@
 from django.shortcuts import render
 # Create your views here.
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, filters
 from quotation import serializers
 from quotation import models
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -15,6 +16,9 @@ class PlanViewSet(viewsets.ModelViewSet):
     """Gerencia planos no banco"""
     serializer_class = serializers.PlanSerializer
     queryset = models.Plan.objects.all()
+    filter_backends = [filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['vehicle_specie__id', 'vehicle_type__id']
 
 
 class VehicleViewSet(viewsets.ModelViewSet):
@@ -33,3 +37,4 @@ class ChosenPlanViewSet(viewsets.ModelViewSet):
     """Gerencia Planos escolhidos no banco"""
     serializer_class = serializers.ChosenPlanSerializer
     queryset = models.ChosenPlan.objects.all()
+

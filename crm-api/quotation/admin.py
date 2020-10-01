@@ -17,7 +17,13 @@ class PlanAdmin(admin.ModelAdmin):
     inlines = [PlanPriceInline]
     save_as = True
 
-    list_display = ('name','vehicle_type__name', 'vehicle_type__specie')
+    list_display = ('name','get_vehicle_type', 'get_vehicle_specie')
+
+    def get_vehicle_type(self, obj):
+        return "\n".join([p.name for p in obj.vehicle_type.all()])
+
+    def get_vehicle_specie(self, obj):
+        return "\n".join([p.name for p in obj.vehicle_specie.all()])
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         if db_field.name == 'vehicle_type':
