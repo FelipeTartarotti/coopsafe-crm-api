@@ -18,25 +18,24 @@ class VehicleSpecie(models.Model):
         return str(self.name)
 
 
-class PlanPrices(models.Model):
-
-    vehicle_price_from = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    vehicle_price_to = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    plan_price = models.DecimalField(max_digits=10, decimal_places=2 , null=True, blank=True)
-
-    def __str__(self):
-        return str(self.vehicle_price_from)
-
-
 class Plan(models.Model):
 
     vehicle_type = models.ManyToManyField(VehicleType)
     vehicle_specie = models.ManyToManyField(VehicleSpecie)
     name = models.CharField(max_length=200, null=True, blank=True)
-    plan_price = models.ManyToManyField(PlanPrices)
 
     def __str__(self):
         return str(self.name)
+
+
+class PlanPrice(models.Model):
+    plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.SET_NULL)
+    vehicle_price_from = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    vehicle_price_to = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    plan_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.vehicle_price_from)
 
 
 class Vehicle(models.Model):
