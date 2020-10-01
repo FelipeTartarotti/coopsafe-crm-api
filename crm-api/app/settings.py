@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cotacao',
         'USER': 'coopsafe',
         'PASSWORD': 'coop123',
