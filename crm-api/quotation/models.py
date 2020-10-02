@@ -14,7 +14,7 @@ def image_file_path(instance, filename):
     return os.path.join('images/plans/', filename)
 
 
-class VehicleSpecie(models.Model):
+class VehicleType(models.Model):
 
     name = models.CharField(max_length=200, null=True, blank=True)
 
@@ -22,10 +22,10 @@ class VehicleSpecie(models.Model):
         return str(self.name)
 
 
-class VehicleType(models.Model):
+class VehicleSpecie(models.Model):
 
     name = models.CharField(max_length=200, null=True, blank=True)
-    specie = models.ManyToManyField(VehicleSpecie)
+    vehicle_type = models.ManyToManyField(VehicleType)
 
     def __str__(self):
         return str(self.name)

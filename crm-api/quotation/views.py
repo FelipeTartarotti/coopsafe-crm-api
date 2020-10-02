@@ -31,6 +31,9 @@ class VehicleSpecieViewSet(viewsets.ModelViewSet):
     """Gerencia espécies de veículos no banco"""
     serializer_class = serializers.VehicleSpecieSerializer
     queryset = models.VehicleSpecie.objects.all()
+    filter_backends = [filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['vehicle_type__id']
 
 
 class VehicleTypeViewSet(viewsets.ModelViewSet):
