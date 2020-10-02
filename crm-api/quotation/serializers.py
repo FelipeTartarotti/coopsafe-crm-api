@@ -73,7 +73,16 @@ class PlanSerializer(serializers.ModelSerializer):
             return []
 
 
+class PlanNameSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Plan
+        fields = ('name',)
+
 class ChosenPlanSerializer(serializers.ModelSerializer):
+
+    plan = PlanNameSerializer(many=True)
+
     class Meta:
         model = models.ChosenPlan
         fields = '__all__'

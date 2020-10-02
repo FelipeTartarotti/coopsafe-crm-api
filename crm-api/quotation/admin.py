@@ -13,11 +13,11 @@ class PlanPriceInline(admin.StackedInline):
     extra = 0
 
 
-class VehicleTypeAdmin(admin.ModelAdmin):
+class VehicleSpecieAdmin(admin.ModelAdmin):
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
 
-        if db_field.name == 'vehicle_specie':
+        if db_field.name == 'vehicle_type':
             kwargs['widget'] = CheckboxSelectMultiple()
             kwargs['help_text'] = ''
 
@@ -58,7 +58,7 @@ for model_name, model in quotation.models.items():
         admin.site.register(model,PlanPricesAdmin)
     elif model_name == "plan":
         admin.site.register(model,PlanAdmin)
-    elif model_name == "vehicletype":
-        admin.site.register(model,VehicleTypeAdmin)
+    elif model_name == "vehiclespecie":
+        admin.site.register(model,VehicleSpecieAdmin)
     else:
         admin.site.register(model)
