@@ -34,6 +34,10 @@ class PlanAdmin(admin.ModelAdmin):
             kwargs['widget'] = CheckboxSelectMultiple()
             kwargs['help_text'] = ''
 
+        if db_field.name == 'product':
+            kwargs['widget'] = CheckboxSelectMultiple()
+            kwargs['help_text'] = ''
+
         return db_field.formfield(**kwargs)
 
 
