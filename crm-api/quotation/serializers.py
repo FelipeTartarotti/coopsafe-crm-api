@@ -2,6 +2,11 @@ from rest_framework import serializers
 from quotation import models
 from rest_framework.fields import SerializerMethodField
 
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Product
+        fields = '__all__'
+
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,6 +40,7 @@ class PlanPriceSerializer(serializers.ModelSerializer):
 
 class PlanSerializer(serializers.ModelSerializer):
     price = SerializerMethodField()
+    product = ProductSerializer(many=True)
 
     class Meta:
         model = models.Plan
