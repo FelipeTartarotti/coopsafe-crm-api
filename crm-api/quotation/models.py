@@ -82,7 +82,7 @@ class ChosenPlan(models.Model):
     plan_name = models.CharField(max_length=200, null=True, blank=True)
     adesao = models.CharField(max_length=200, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
+    #shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return str(self.plano)
