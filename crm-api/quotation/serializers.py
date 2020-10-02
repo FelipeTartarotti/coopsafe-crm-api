@@ -6,7 +6,6 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
         fields = '__all__'
-        depth=2
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -47,11 +46,25 @@ class PlanPriceSerializer(serializers.ModelSerializer):
 
 class ChosenPlanSerializer(serializers.ModelSerializer):
 
-    plan = PlanSerializer()
+    plan_name = SerializerMethodField()
+    products = SerializerMethodField()
 
     class Meta:
         model = models.ChosenPlan
         fields = '__all__'
+
+    def get_plan_name(self, obj):
+        try:
+            return obj.plan.name
+        except:
+            return ""
+
+    def get_products(self, obj):
+        try:
+            products = ProductSerializer(obj.plan.product,many=True)
+            return products.data
+        except:
+            return ""
 
 
 class PlanSerializer(serializers.ModelSerializer):
