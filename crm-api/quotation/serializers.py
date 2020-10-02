@@ -79,9 +79,10 @@ class PlanNameSerializer(serializers.ModelSerializer):
         model = models.Plan
         fields = ('name')
 
+
 class ChosenPlanSerializer(serializers.ModelSerializer):
 
-    plan = PlanNameSerializer(many=True)
+    plan = PlanNameSerializer()
 
     class Meta:
         model = models.ChosenPlan
