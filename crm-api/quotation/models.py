@@ -92,10 +92,10 @@ class Person(models.Model):
 
 class ChosenPlan(models.Model):
 
-    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL)
-    adesao = models.CharField(max_length=200)
+    plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
+    person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
+    adesao = models.CharField(max_length=200, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    person = models.ForeignKey(Person, on_delete=models.SET_NULL)
 
     #shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
 
