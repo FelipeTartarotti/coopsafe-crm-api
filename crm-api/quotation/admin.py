@@ -24,7 +24,6 @@ class VehicleTypeAdmin(admin.ModelAdmin):
         return db_field.formfield(**kwargs)
 
 
-
 class PlanAdmin(admin.ModelAdmin):
     inlines = [PlanPriceInline]
     save_as = True
@@ -54,6 +53,7 @@ class PlanAdmin(admin.ModelAdmin):
 
 
 for model_name, model in quotation.models.items():
+
     if model_name == "planprices":
         admin.site.register(model,PlanPricesAdmin)
     elif model_name == "plan":
