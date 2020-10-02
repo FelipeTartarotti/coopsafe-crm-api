@@ -77,27 +77,30 @@ class Vehicle(models.Model):
             return str(self.plate)
 
 
-class ChosenPlan(models.Model):
-
-    plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.SET_NULL)
-    adesao = models.CharField(max_length=200, null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    #shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
-
-    def __str__(self):
-        return str(self.plano)
-
-
 class Person(models.Model):
 
     name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     whatsapp = models.CharField(max_length=200)
     vehicle = models.ForeignKey(Vehicle, null=True, blank=True, on_delete=models.SET_NULL)
-    chosen_plan = models.ForeignKey(ChosenPlan, null=True, blank=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.email)
+
+
+class ChosenPlan(models.Model):
+
+    plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.SET_NULL)
+    adesao = models.CharField(max_length=200, null=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    person = models.ForeignKey(Person, null=True, blank=True, on_delete=models.SET_NULL)
+
+    #shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return str(self.plano)
+
+
 
