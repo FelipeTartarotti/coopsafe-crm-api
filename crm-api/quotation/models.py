@@ -33,7 +33,7 @@ class VehicleSpecie(models.Model):
 class Product(models.Model):
 
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True,upload_to=image_file_path)
+    image = models.ImageField(null=True, blank=True, upload_to=image_file_path)
 
     def __str__(self):
         return str(self.name)
@@ -44,7 +44,7 @@ class Plan(models.Model):
     vehicle_type = models.ManyToManyField(VehicleType)
     vehicle_specie = models.ManyToManyField(VehicleSpecie)
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True, upload_to=image_file_path)
+    image = models.ImageField(null=True, blank=True, upload_to=image_file_path)
     product = models.ManyToManyField(Product)
 
     def __str__(self):
