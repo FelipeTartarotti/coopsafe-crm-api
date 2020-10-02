@@ -1,6 +1,9 @@
 cd /var/www/html/coopsafe-crm-api
 source env/bin/activate
 
+./manage.py makemigrations
+./manage.py migrate
+
 sudo systemctl restart nginx
 sudo systemctl daemon-reload
 sudo systemctl restart gunicorn
@@ -9,3 +12,6 @@ sudo systemctl restart gunicorn
 nano /etc/nginx/sites-available/cotacao-api.coopsafe.com.br
 
 sudo tail -30 /var/log/nginx/error.log
+
+ssh root@191.252.196.5
+#Ik1P%LZgF98
