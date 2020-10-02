@@ -33,6 +33,12 @@ class VehicleSpecieViewSet(viewsets.ModelViewSet):
     queryset = models.VehicleSpecie.objects.all()
 
 
+class VehicleTypeViewSet(viewsets.ModelViewSet):
+    """Gerencia tipos de veículos no banco"""
+    serializer_class = serializers.VehicleTypeSerializer
+    queryset = models.VehicleType.objects.all()
+
+
 class ChosenPlanViewSet(viewsets.ModelViewSet):
     """Gerencia Planos escolhidos no banco"""
     serializer_class = serializers.ChosenPlanSerializer

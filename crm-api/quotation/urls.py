@@ -10,7 +10,7 @@ router.register('vehicle', views.VehicleViewSet, basename="vehicle")
 router.register('plan', views.PlanViewSet, basename="plan")
 router.register('chosen-plan', views.ChosenPlanViewSet, basename="chosen-plan")
 router.register('vehicle-specie', views.VehicleSpecieViewSet, basename="vehicle-specie")
-
+router.register('vehicle-type', views.VehicleTypeViewSet, basename="vehicle-type")
 
 urlpatterns = [
     path('', include(router.urls)),

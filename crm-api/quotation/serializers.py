@@ -32,6 +32,12 @@ class VehicleSpecieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class VehicleTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.VehicleType
+        fields = '__all__'
+
+
 class PlanPriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PlanPrice
