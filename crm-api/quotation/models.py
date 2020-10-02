@@ -30,21 +30,29 @@ class VehicleSpecie(models.Model):
         return str(self.name)
 
 
+class Products(models.Model):
+
+    name = models.CharField(max_length=200, null=True, blank=True)
+    image = models.ImageField(null=True,upload_to=image_file_path)
+
+    def __str__(self):
+        return str(self.name)
+
+
 class Plan(models.Model):
 
     vehicle_type = models.ManyToManyField(VehicleType)
     vehicle_specie = models.ManyToManyField(VehicleSpecie)
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(
-        null=True,
-        upload_to=image_file_path
-    )
+    image = models.ImageField(null=True, upload_to=image_file_path)
+    products = models.ManyToManyField(Products)
 
     def __str__(self):
         return str(self.name)
 
 
 class PlanPrice(models.Model):
+
     plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.SET_NULL)
     vehicle_price_from = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     vehicle_price_to = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
@@ -74,6 +82,7 @@ class ChosenPlan(models.Model):
     plan_name = models.CharField(max_length=200, null=True, blank=True)
     adesao = models.CharField(max_length=200, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return str(self.plano)

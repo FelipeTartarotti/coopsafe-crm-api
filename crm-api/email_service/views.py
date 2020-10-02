@@ -61,4 +61,21 @@ class EmailServiceViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
-
+#
+# def send_email(request,charts):
+#     """Envia link da cartela comprada"""
+#
+#     mail_subject = 'Compra Legalcap'
+#
+#     message = render_to_string('cartela_comprada.html', {
+#         'name': request.user.name,
+#         'charts': charts
+#     })
+#
+#     text_content = strip_tags(message)
+#     from_email = settings.EMAIL_HOST_USER
+#     msg = EmailMultiAlternatives(mail_subject, text_content, from_email, [request.user.email])
+#     msg.attach_alternative(message, "text/html")
+#     msg.send()
+#
+#     return True
