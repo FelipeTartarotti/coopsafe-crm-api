@@ -44,7 +44,17 @@ class PlanPriceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ChosenPlanSerializer(serializers.ModelSerializer):
+
+    plan = PlanSerializer()
+
+    class Meta:
+        model = models.ChosenPlan
+        fields = '__all__'
+
+
 class PlanSerializer(serializers.ModelSerializer):
+
     price = SerializerMethodField()
     product = ProductSerializer(many=True)
 
@@ -73,17 +83,3 @@ class PlanSerializer(serializers.ModelSerializer):
             return []
 
 
-class PlanNameSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = models.Plan
-        fields = ('name')
-
-
-class ChosenPlanSerializer(serializers.ModelSerializer):
-
-    plan = PlanNameSerializer()
-
-    class Meta:
-        model = models.ChosenPlan
-        fields = '__all__'
