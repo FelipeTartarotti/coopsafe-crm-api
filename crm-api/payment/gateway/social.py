@@ -5,7 +5,7 @@ import requests
 from app import settings
 
 
-def create_buyer_id(data,request):
+def create_buyer_id(request,data):
     """Criar um id para o comprador"""
 
     path = os.path.join(settings.SOCIAL_URL,"buyers/")
@@ -16,9 +16,9 @@ def create_buyer_id(data,request):
     }
 
     data = {
-        "name":data.name,
-        "seller_id":settings.SELLER_ID,
-        "taxpayer_id": data.taxpayer_id
+        "name":data.get('holder_name'),
+        "user_id":settings.SELLER_ID,
+        "taxpayer_id": data.get('cpf')
     }
 
     request_result = requests.post(path, headers=headers, json=data)
@@ -27,10 +27,10 @@ def create_buyer_id(data,request):
     return request_result_json.get("id")
 
 
-def tokenize_card(data,request):
+def tokenize_card(request,data):
     """Cria token para o cartao"""
 
-    path = os.path.join("https://api.zoop.ws/v1/marketplaces/",settings.MARKETPLACE_ID,"cards/tokens")
+    path = os.path.join("https://api.zoop.ws/v1/marketplaces",settings.MARKETPLACE_ID,"cards/tokens")
 
     token = "".join([settings.ZPK,":",""])
     token = base64.b64encode(bytes(token, 'utf-8'))
@@ -56,7 +56,7 @@ def tokenize_card(data,request):
     return request_result_json
 
 
-def add_buyer_cards(token,data,buyer_id):
+def add_buyer_cards(tokenized_card,buyer_id,data):
     """Adiciona cartoes cadastrados do buyer"""
 
     path = os.path.join(settings.SOCIAL_URL,"cards","buyer")
@@ -68,9 +68,9 @@ def add_buyer_cards(token,data,buyer_id):
 
     body = {
         "buyer_id": buyer_id,
-        "token": token,
+        "token": tokenized_card,
         "owner_taxpayer_id": data.get("cpf"),
-        "description": data.get("cardholder_name")
+        "description": "Coopsafe"
     }
 
     request_result = requests.post(path, headers=headers, json=body)
@@ -87,13 +87,10 @@ def add_buyer_cards(token,data,buyer_id):
     }
 
 
-def make_payment(request,data):
+def make_payment(request,data,buyer_id,card_id):
     """Efetua o pagamento de crédito"""
 
     path = os.path.join(settings.SOCIAL_URL,"transactions/buyer")
-    buyer_id = create_buyer_id(data.get("cardholder_name"),request)
-    token = tokenize_card(data,request)
-
 
     headers = {
         "Content-Type": "application/json",
@@ -101,14 +98,13 @@ def make_payment(request,data):
     }
 
     data = {
-        "description": "Legal Cap",
+        "description": "Coopsafe",
         "seller_id": settings.SELLER_ID,
         "buyer_id": buyer_id,
         "reference_id":  data.get("order_id"),
-        "card_id": token.id,
+        "card_id": card_id,
         "amount": data.get("amount"),
     }
-
 
 
     request_result = requests.post(path, headers=headers, json=data)

@@ -6,11 +6,19 @@ from django.db import models
 class Buyer(models.Model):
 
     buyer_id = models.CharField(max_length=200, null=True, blank=True)
-    seller_id = models.CharField(max_length=200, null=True, blank=True)
     taxpayer_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return str(self.buyer_id)
+        return str(self.taxpayer_id)
+
+    def retrieve_or_create(self, data):
+        obj, created = Buyer.objects.get_or_create(
+            taxpayer_id=data.get('cpf'),
+            defaults={
+                'taxpayer_id': data.get('cpf'),
+            },
+        )
+        return obj
 
 
 class CreditCard(models.Model):

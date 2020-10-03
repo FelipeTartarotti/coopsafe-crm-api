@@ -6,5 +6,6 @@ urlpatterns = [
         path('email/', include('email_service.urls')),
         path('fipe/', include('fipe.urls')),
         path('quotation/', include('quotation.urls')),
+        path('payment/', include('payment.urls')),
     ], 'api'))),
 ]

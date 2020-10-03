@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'c+d9ybs0*!_ji3!sudhfa)p!plg)w0hs*%=x%m+bj1r8)vkkcm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Application definition
 
@@ -101,23 +101,23 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cotacao',
-        'USER': 'coopsafe',
-        'PASSWORD': 'coop123',
-        'HOST' : 'localhost',
-        'PORT' : '',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cotacao',
+#         'USER': 'coopsafe',
+#         'PASSWORD': 'coop123',
+#         'HOST' : 'localhost',
+#         'PORT' : '',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -170,8 +170,8 @@ URL_PLACAS ="https://placafipeapi.com.br/"
 PLATE_USER="leandro_ribeiro"
 PLATE_PASSWORD="JD95jKd82ND72Eh1j83C9"
 
+SOCIAL_URL = "https://payments.socialplace.com.br/"
 SOCIAL_TOKEN = "fa647345-eef1-48d0-8fc2-497f6e6ed67d"
 SELLER_ID = "5f71ffebdf441060a3118296"
-
-MARKETPLACE_ID = "15ac31ccb98f4ee68c1e2fb1807c5e86",
+MARKETPLACE_ID = "15ac31ccb98f4ee68c1e2fb1807c5e86"
 ZPK = "zpk_prod_U74dvDz8A8u7wgvHDBSYooQN"
