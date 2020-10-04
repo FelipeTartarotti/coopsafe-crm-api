@@ -30,6 +30,16 @@ class CreditCard(models.Model):
     def __str__(self):
         return str(self.card_number)
 
+    def retrieve_or_create(self, data):
+        obj, created = CreditCard.objects.get_or_create(
+            card_number=data.get('card_number'),
+            defaults={
+                'card_number': data.get('card_number'),
+            },
+        )
+
+        return obj
+
 
 class Shopping(models.Model):
 
