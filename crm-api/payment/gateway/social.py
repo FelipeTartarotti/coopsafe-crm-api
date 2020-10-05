@@ -98,13 +98,16 @@ def make_payment(request,data,credit_card,chosen_plan):
         "X-Auth-Token": settings.SOCIAL_TOKEN
     }
 
+    adesao = chosen_plan.adesao.replace(".","")
+    adesao = adesao.replace(",","")
+
     data = {
         "description": "".join(["Coopsafe", " - ", chosen_plan.plan.name]),
         "seller_id": settings.SELLER_ID,
         "buyer_id": credit_card.buyer.buyer_id,
         "reference_id":  uuid.uuid4().hex[:6].upper(),
         "card_id": credit_card.card_id,
-        "amount": chosen_plan.adesao,
+        "amount": adesao,
     }
 
 

@@ -42,8 +42,10 @@ class CreditCardViewSet(viewsets.ModelViewSet):
                 if payment.get('status_code') == 200:
                     chosen_plan.status = 'PAID'
                     chosen_plan.save()
+                    return Response(payment)
+                else:
+                    return HttpResponse(payment, status=400)
 
-                return Response(payment)
             except Exception as error:
 
                 return HttpResponse(error, status=400)
