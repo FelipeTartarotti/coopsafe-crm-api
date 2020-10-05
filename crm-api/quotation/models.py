@@ -47,6 +47,7 @@ class Plan(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to=image_file_path)
     product = models.ManyToManyField(Product)
+    order = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
