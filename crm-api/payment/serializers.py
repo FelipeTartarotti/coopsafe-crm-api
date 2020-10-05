@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from payment import models
-
+from quotation.serializers import ChosenPlanSerializer
 
 class ShoppingSerializer(serializers.ModelSerializer):
+
+    chosen_plan = ChosenPlanSerializer()
+
     class Meta:
         model = models.Shopping
         fields = '__all__'
