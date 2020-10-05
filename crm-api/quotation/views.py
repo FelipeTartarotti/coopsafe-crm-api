@@ -15,7 +15,7 @@ class PersonViewSet(viewsets.ModelViewSet):
 class PlanViewSet(viewsets.ModelViewSet):
     """Gerencia planos no banco"""
     serializer_class = serializers.PlanSerializer
-    queryset = models.Plan.objects.all()
+    queryset = models.Plan.objects.all().order_by('order')
     filter_backends = [filters.SearchFilter]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['vehicle_specie__id', 'vehicle_type__id']
