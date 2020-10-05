@@ -1,8 +1,37 @@
 from django.contrib import admin
 from django.apps import	apps
 from django.forms import CheckboxSelectMultiple
+from django.utils.html import format_html
 from quotation import models
 quotation = apps.get_app_config('quotation')
+
+class ChosenPlanAdmin(admin.ModelAdmin):
+    list_display = ('plan','get_person_name','get_person_whatsapp','get_person_email','adesao','get_status',)
+
+    def get_person_name(self, obj):
+        return "\n".join([obj.person.name])
+
+    def get_person_whatsapp(self, obj):
+        return "\n".join([obj.person.whatsapp])
+
+    def get_person_email(self, obj):
+        return "\n".join([obj.person.email])
+
+    def get_status(self, obj):
+        color = 'green'
+        status = ""
+        if obj.status == 'PAID':
+            status="PAGO"
+        return format_html(
+            '<b style="color:{};">{}</b>',
+            color,
+            status
+        )
+
+    get_person_name.short_description = 'Nome'
+    get_person_whatsapp.short_description = 'Whats'
+    get_person_email.short_description = 'Email'
+
 
 class PlanPricesAdmin(admin.ModelAdmin):
     list_display = ('vehicle_price_from','vehicle_price_to',
@@ -60,5 +89,7 @@ for model_name, model in quotation.models.items():
         admin.site.register(model,PlanAdmin)
     elif model_name == "vehiclespecie":
         admin.site.register(model,VehicleSpecieAdmin)
+    elif model_name == "chosenplan":
+        admin.site.register(model,ChosenPlanAdmin)
     else:
         admin.site.register(model)

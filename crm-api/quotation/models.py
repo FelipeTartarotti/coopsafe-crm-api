@@ -21,6 +21,10 @@ class VehicleType(models.Model):
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        verbose_name = 'Tipo de veículo'
+        verbose_name_plural = 'Tipos de veículo'
+
 
 class VehicleSpecie(models.Model):
 
@@ -30,6 +34,10 @@ class VehicleSpecie(models.Model):
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        verbose_name = 'Espécie'
+        verbose_name_plural = 'Espécies'
+
 
 class Product(models.Model):
 
@@ -38,6 +46,10 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    class Meta:
+        verbose_name = 'Produto'
+        verbose_name_plural = 'Produtos'
 
 
 class Plan(models.Model):
@@ -51,6 +63,10 @@ class Plan(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    class Meta:
+        verbose_name = 'Plano'
+        verbose_name_plural = 'Planos'
 
 
 class PlanPrice(models.Model):
@@ -78,6 +94,10 @@ class Vehicle(models.Model):
     def __str__(self):
             return str(self.plate)
 
+    class Meta:
+        verbose_name = 'Veículo'
+        verbose_name_plural = 'Veículos'
+
 
 class Person(models.Model):
 
@@ -90,6 +110,10 @@ class Person(models.Model):
 
     def __str__(self):
         return str(self.email)
+
+    class Meta:
+        verbose_name = 'Pessoa'
+        verbose_name_plural = 'Pessoas'
 
 
 class ChosenPlan(models.Model):
@@ -108,6 +132,10 @@ class ChosenPlan(models.Model):
         null=True,
         blank=True
     )
+
+    class Meta:
+        verbose_name = 'Plano escolhido'
+        verbose_name_plural = 'Planos escolhidos'
 
     def __str__(self):
         return str(self.plan)
