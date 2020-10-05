@@ -44,6 +44,8 @@ class CreditCard(models.Model):
 class Shopping(models.Model):
 
     buyer = models.ForeignKey(Buyer, null=True, blank=True, on_delete=models.SET_NULL)
+    chosen_plan = models.ForeignKey(Buyer, null=True, blank=True, on_delete=models.SET_NULL)
+    reference_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return str(self.card_number)
+        return str(self.reference_id)

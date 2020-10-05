@@ -108,8 +108,6 @@ class ChosenPlan(models.Model):
         blank=True
     )
 
-    #shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
-
     def __str__(self):
         return str(self.plan)
 

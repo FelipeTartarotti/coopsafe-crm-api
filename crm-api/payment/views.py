@@ -5,7 +5,9 @@ from rest_framework.response import Response
 from payment import serializers
 from payment.gateway import social
 from payment import models
+from payment import serializers
 from quotation.models import ChosenPlan
+import uuid
 
 class CreditCardViewSet(viewsets.ModelViewSet):
 
@@ -36,13 +38,24 @@ class CreditCardViewSet(viewsets.ModelViewSet):
                     credit_card.buyer_id = buyer.id
                     credit_card.save()
 
+                reference_id = uuid.uuid4().hex[:6].upper()
+
                 chosen_plan = ChosenPlan.objects.get(id=validated_data.get('chosen_plan_id'))
-                payment = social.make_payment(request, validated_data, credit_card, chosen_plan)
+                payment = social.make_payment(request, validated_data, credit_card, chosen_plan, reference_id)
 
                 if payment.get('status_code') == 200:
                     chosen_plan.status = 'PAID'
                     chosen_plan.save()
-                    return Response(payment)
+                    shopping = models.Shopping.objects.create(
+                        buyer=buyer,
+                        chosen_plan=chosen_plan,
+                        reference_id=reference_id
+                    )
+
+                    shopping = serializers.ShoppingSerializer(shopping)
+
+                    return Response(shopping.data)
+
                 else:
                     raise ValueError(payment.get("message"))
 

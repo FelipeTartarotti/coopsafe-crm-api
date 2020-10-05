@@ -1,4 +1,11 @@
 from rest_framework import serializers
+from payment import models
+
+
+class ShoppingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Shopping
+        fields = '__all__'
 
 
 class CreditCardSerializer(serializers.Serializer):

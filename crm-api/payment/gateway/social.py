@@ -3,7 +3,6 @@ import json
 import os
 import requests
 from app import settings
-import uuid
 
 
 def create_buyer_id(request,data):
@@ -88,7 +87,7 @@ def add_buyer_cards(tokenized_card,buyer_id,data):
     }
 
 
-def make_payment(request,data,credit_card,chosen_plan):
+def make_payment(request, data, credit_card, chosen_plan, reference_id):
     """Efetua o pagamento de crédito"""
 
     path = os.path.join(settings.SOCIAL_URL,"transactions/buyer")
@@ -105,7 +104,7 @@ def make_payment(request,data,credit_card,chosen_plan):
         "description": "".join(["Coopsafe", " - ", chosen_plan.plan.name]),
         "seller_id": settings.SELLER_ID,
         "buyer_id": credit_card.buyer.buyer_id,
-        "reference_id":  uuid.uuid4().hex[:6].upper(),
+        "reference_id": reference_id,
         "card_id": credit_card.card_id,
         "amount": adesao,
     }
