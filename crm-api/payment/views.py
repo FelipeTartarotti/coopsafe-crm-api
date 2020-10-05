@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from payment import serializers
 from payment.gateway import social
 from payment import models
+from quotation.models import ChosenPlan
+
 class CreditCardViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
@@ -34,10 +36,14 @@ class CreditCardViewSet(viewsets.ModelViewSet):
                     credit_card.buyer_id = buyer.id
                     credit_card.save()
 
+                chosen_plan = ChosenPlan.objects.get(id=validated_data.get('chosen_plan_id'))
+                payment = social.make_payment(request, validated_data, credit_card, chosen_plan)
 
-                #MAKE PAYMENT
+                if payment.get('status_code') == 200:
+                    chosen_plan.status = 'PAID'
+                    chosen_plan.save()
 
-                return Response(buyer_cards)
+                return Response(payment)
             except Exception as error:
 
                 return HttpResponse(error, status=400)

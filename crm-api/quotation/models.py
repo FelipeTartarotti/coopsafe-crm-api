@@ -93,10 +93,20 @@ class Person(models.Model):
 
 class ChosenPlan(models.Model):
 
+    STATUS_CHOICE = [
+        ('WAITING_PAYMENT ', 'Aguardando Pagamento'),
+        ('PAID', 'Pago'),
+    ]
+
     plan = models.ForeignKey(Plan, null=True, on_delete=models.SET_NULL)
     person = models.ForeignKey(Person, null=True, on_delete=models.SET_NULL)
     adesao = models.CharField(max_length=200, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(verbose_name='Status no pagamento',max_length=30,
+        choices=STATUS_CHOICE,
+        null=True,
+        blank=True
+    )
 
     #shopping = models.ForeignKey("payment.Shopping", null=True, blank=True, on_delete=models.SET_NULL)
 
