@@ -6,7 +6,24 @@ from quotation import models
 quotation = apps.get_app_config('quotation')
 
 class ChosenPlanAdmin(admin.ModelAdmin):
-    list_display = ('plan','get_person_name','get_person_whatsapp','get_person_email','adesao','get_status',)
+    list_display = (
+        'plan','get_person_name',
+        'get_person_whatsapp','get_person_email',
+        'get_vehicle_model',
+        'get_vehicle_price',
+        'adesao','get_status',)
+
+    def get_vehicle_model(self, obj):
+        if obj.person.vehicle:
+            return "\n".join([obj.person.vehicle.model])
+        else:
+            return ""
+
+    def get_vehicle_price(self, obj):
+        if obj.person.vehicle:
+            return "\n".join([obj.person.vehicle.price])
+        else:
+            return ""
 
     def get_person_name(self, obj):
         return "\n".join([obj.person.name])
