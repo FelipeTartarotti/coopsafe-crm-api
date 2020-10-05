@@ -44,7 +44,7 @@ class CreditCardViewSet(viewsets.ModelViewSet):
                     chosen_plan.save()
                     return Response(payment)
                 else:
-                    return HttpResponse(payment, status=400)
+                    raise ValueError(payment.get("message"))
 
             except Exception as error:
 
