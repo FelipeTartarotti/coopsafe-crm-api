@@ -48,6 +48,8 @@ class ChosenPlanAdmin(admin.ModelAdmin):
     get_person_name.short_description = 'Nome'
     get_person_whatsapp.short_description = 'Whats'
     get_person_email.short_description = 'Email'
+    get_vehicle_model.short_description = 'Modelo'
+    get_vehicle_price.short_description = 'Preço'
 
 
 class PlanPricesAdmin(admin.ModelAdmin):
