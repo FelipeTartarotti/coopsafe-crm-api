@@ -21,9 +21,9 @@ class ChosenPlanAdmin(admin.ModelAdmin):
 
     def get_vehicle_price(self, obj):
         if obj.person.vehicle:
-            return "\n".join([obj.person.vehicle.price])
+            return obj.person.vehicle.price
         else:
-            return ""
+            return 0
 
     def get_person_name(self, obj):
         return "\n".join([obj.person.name])
